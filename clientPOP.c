@@ -7,6 +7,44 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+/*
+Funcion que pide el correo al usurio y verifica que este bien escrito
+return correo 
+*/
+char *correo(){
+ 
+  char *cadena = (char*)malloc(100*sizeof(char*));
+  int i=0;
+  char *token = NULL;
+  
+do{
+ 
+  printf("Inserte su correo\n");
+  fgets(cadena,100,stdin);
+  token = strtok(cadena,"@");
+  token = strtok(NULL,"@");
+ 
+ if(token==NULL)                            //Falta el @
+    printf("correo no valido \n");
+
+   }while(token==NULL);
+ 
+    return cadena;
+}
+/*
+Funcion que pide la contraseña a su correo al usuario 
+return ps
+*/
+
+char *contra(){
+  char *ps = (char*)malloc(50*(sizeof(char*)));
+  printf("Inserte su contraseña\n");
+  fgets(ps,50,stdin);
+  return ps;
+
+}
+
+
 /**
  *Funcion que imprime mensajes de error y despues
  *da un exit(0) para salir del programa
@@ -56,7 +94,7 @@ void conexion(int puerto){
  */
 int main(int argc , char *argv[]){
   if(argc < 3){
-    fprintf(stderr,"usando el puerto %s\n", argv[0]);
+    fprintf(stderr,"usando el puerto %s\n", argv[1]);
     exit(0);
   }
   int puerto = atoi(argv[1]);
