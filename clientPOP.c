@@ -78,8 +78,8 @@ void conexion(int puerto){
   }
   
   bzero((char *) &servidorAdd, sizeof(servidorAdd));
-  servidorAdd.sin_family = AF_INET;
   bcopy((char *)servidor -> h_addr,(char *) &servidorAdd.sin_addr.s_addr,servidor -> h_length);
+  servidorAdd.sin_family = AF_INET;
   servidorAdd.sin_port = htons(puerto);
   
   if(connect(popsocket, (struct sockaddr *)&servidorAdd, sizeof(servidorAdd)) < 0){
@@ -97,7 +97,11 @@ int main(int argc , char *argv[]){
     fprintf(stderr,"usando el puerto %s\n", argv[1]);
     exit(0);
   }
-  int puerto = atoi(argv[1]);
+  //printf("Cero %s\n",argv[0]);
+  printf("Host %s\n", argv[1]);
+  printf("Puerto %s\n", argv[2]);
+
+  int puerto = atoi(argv[2]);
   conexion(puerto);
   
 } 
