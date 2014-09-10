@@ -48,6 +48,7 @@ void conexion(int puerto){
     error("Error al iniciar la conexion");
   }
   printf("Conectado al servidor");
+  close(popsocket);
 }
 
 /**
