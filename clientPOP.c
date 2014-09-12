@@ -6,10 +6,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <pop3.h>
 
-/*
-Funcion que pide el correo al usurio y verifica que este bien escrito
-return correo 
+/**
+ *Funcion que pide el correo al usurio y verifica que este bien escrito
+ *return correo 
 */
 char *correo(){
  
@@ -31,9 +32,10 @@ do{
  
     return cadena;
 }
-/*
-Funcion que pide la contraseña a su correo al usuario 
-return ps
+
+/**
+ *Funcion que pide la contraseña a su correo al usuario 
+ *return ps
 */
 
 char *contra(){
@@ -60,19 +62,20 @@ void error(const char *mensaje){
  *FUncion que hace la conexion
  */
 
-void conexion(int puerto){
+void conexion(int puerto, char *host){
   struct sockaddr_in servidorAdd;
   struct hostent *servidor;
   int popsocket;
   char recivido[256];
-
+  char buffer[256];
+  int respSocket;
   popsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
   
   if(popsocket < 0){
     error("Error al abrir el socket");
   }
   
-  servidor = gethostbyname("localhost");
+  servidor = gethostbyname(host);
   if(servidor == NULL){
     error("No se encontro el sevidor");
   }
@@ -85,7 +88,16 @@ void conexion(int puerto){
   if(connect(popsocket, (struct sockaddr *)&servidorAdd, sizeof(servidorAdd)) < 0){
     error("Error al iniciar la conexion");
   }
+
   printf("Conectado al servidor");
+  
+  bzero(recivido,256);
+  bzero(buffer, 256);
+  
+  respSocket = recv(popsocket, recivido, 255,0);
+  if(respSocket < 0)
+    error("Error al recivido informacion");
+  printf("\n%s", recivido);
   close(popsocket);
 }
 
@@ -102,6 +114,6 @@ int main(int argc , char *argv[]){
   printf("Puerto %s\n", argv[2]);
 
   int puerto = atoi(argv[2]);
-  conexion(puerto);
+  conexion(puerto, argv[1]);
   
 } 
