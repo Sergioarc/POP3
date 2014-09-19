@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <pop3.h>
+
 
 /**
  *Funcion que pide el correo al usurio y verifica que este bien escrito
@@ -90,14 +90,16 @@ void conexion(int puerto, char *host){
   }
 
   printf("Conectado al servidor");
-  
+  send(popsocket,"USER: sergioar@ciancias.unam.mx",38,0);
+  send(popsocket,"PASS: ")
+  printf("Se envio");
   bzero(recivido,256);
   bzero(buffer, 256);
   
   respSocket = recv(popsocket, recivido, 255,0);
   if(respSocket < 0)
     error("Error al recivido informacion");
-  printf("\n%s", recivido);
+  printf("\nContenido: %s\n", recivido);
   close(popsocket);
 }
 
