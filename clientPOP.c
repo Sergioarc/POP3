@@ -69,7 +69,9 @@ void conexion(int puerto, char *host){
   char recivido[256];
   char buffer[256];
   int respSocket;
-  popsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  printf("Conectando al servidor\n");
+
+  popsocket = socket(AF_INET, SOCK_STREAM, 0);
   
   if(popsocket < 0){
     error("Error al abrir el socket");
@@ -89,17 +91,37 @@ void conexion(int puerto, char *host){
     error("Error al iniciar la conexion");
   }
 
-  printf("Conectado al servidor");
-  send(popsocket,"USER: sergioar@ciancias.unam.mx",38,0);
-  send(popsocket,"PASS: ")
-  printf("Se envio");
-  bzero(recivido,256);
-  bzero(buffer, 256);
-  
   respSocket = recv(popsocket, recivido, 255,0);
   if(respSocket < 0)
-    error("Error al recivido informacion");
-  printf("\nContenido: %s\n", recivido);
+    error("Error al recibir informacion");
+  printf("%s\n", recivido);
+
+  bzero(recivido,256);
+  bzero(buffer, 256);
+  printf("Enviando nombre de Usuario\n");
+  send(popsocket,"USER user2\n",11,0);
+  respSocket = recv(popsocket, recivido, 255,0);
+  if(respSocket < 0)
+    error("Error al recibir informacion");
+  printf("%s\n", recivido);
+
+  bzero(recivido,256);
+  bzero(buffer, 256);
+  printf("Enviando password\n");
+  send(popsocket,"PASS user2\n",11,0);
+  respSocket = recv(popsocket, recivido, 255,0);
+  if(respSocket < 0)
+    error("Error al recibir informacion");
+  printf("%s\n", recivido);
+
+  bzero(recivido,256);
+  bzero(buffer, 256);
+  printf("Enviando STAT");
+  send(popsocket,"STAT\n",6,0);
+  respSocket = recv(popsocket,recivido,255,0);
+    if(respSocket < 0)
+    error("\nError al recibir informacion");
+  printf("\nSTAT: %s\n", recivido);
   close(popsocket);
 }
 
@@ -117,5 +139,5 @@ int main(int argc , char *argv[]){
 
   int puerto = atoi(argv[2]);
   conexion(puerto, argv[1]);
-  
-} 
+
+}
