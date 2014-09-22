@@ -1,7 +1,13 @@
 POP3
 ====
 
+#IMPORTANTE
+Este servicio no funciona bajo servicios que usen conexiones SSL. Ejemplo: gmail
+
+
 Repositorio que contiene el repositorio para hacer el protocolo POP3
+
+
 
 Hasta el momento solo se ha hecho la la conexion hacia el servidor de gmail mediante pop.gmail.com en el puerto 995
 pero al momento de establecer la conexion se cierra inesperadamente sin recibir datos del servidor.
