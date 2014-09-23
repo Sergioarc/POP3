@@ -1,3 +1,11 @@
+/**
+ *Implementacion de un cliente del Protocolo POP3 para la 
+ *recuperacion de mensajes electronicos 
+ *Sergio Amaro Rosas
+ *Version 1.0
+ *22/09/2014
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
