@@ -17,9 +17,9 @@ Se implementó el loggeo y se hizo una prueba con STAT de POP3.
 
 Ejemplo de la salida:
 
-miguel@miguel:~/POP3$ gcc -o client clientPOP.c 
+usercheko:~/POP3$ gcc -o client clientPOP.c 
 
-miguel@miguel:~/POP3$ ./client localhost 110
+usercheko:~/POP3$ ./client localhost 110
 
 Host localhost
 
