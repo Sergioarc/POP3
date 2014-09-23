@@ -41,4 +41,5 @@ Enviando STAT
 
 STAT: +OK 1 1036
 
-Terminado el protocolo pop3 con todo lo necesario para probarlo
+Terminado el protocolo pop3 con todo lo necesario para probarlo, es decir ya terminado de implementar los comandos de LIST, DELE y RETR con
+un menú para que el usuario pueda interactuar
