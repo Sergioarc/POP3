@@ -39,4 +39,6 @@ Enviando password
 
 Enviando STAT
 
-STAT: +OK 2 1036
+STAT: +OK 1 1036
+
+Terminado el protocolo pop3 con todo lo necesario para probarlo
